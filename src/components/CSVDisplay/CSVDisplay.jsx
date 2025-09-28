@@ -14,7 +14,7 @@ function CSVDisplay() {
 	    complete: function(result) {
             setColHeaders(Object.keys(result.data[0]));
             setCsvData(result.data);
-		    console.log("All done!");
+		    console.log("All done!", result.data);
 	    },
         error: function(error) {
             console.error("Error parsing CSV:", error.message);
