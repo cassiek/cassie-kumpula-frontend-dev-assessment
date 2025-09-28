@@ -25,7 +25,28 @@ function CSVDisplay() {
 
     return (
         <section>
-            
+            {csvData.length > 0 && (
+                <table>
+                    <thead>
+                        <tr>
+                            {colHeaders.map((header) => (
+                                <th key="">
+                                    {header}
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {csvData.Data.map((row) => (
+                            <tr key="">
+                                {colHeaders.map((header) => (
+                                    <td key="">{row[header]}</td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </section>
     )
 };
