@@ -1,11 +1,11 @@
 import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Legend } from "recharts";
 import "./Chart.scss";
-const data = [{}];
 
-function Chart() {
+
+function Chart({ data }) {
 
     return (
-        <ResponsiveContainer width="30rem" height="40rem" className="chart">
+        <ResponsiveContainer width="40rem" height="40rem" className="chart">
             <ScatterChart data={data}>
                 <CartesianGrid />
                 <XAxis />
