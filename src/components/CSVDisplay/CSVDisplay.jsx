@@ -16,7 +16,7 @@ function CSVDisplay() {
 		            //console.log("Row:", row.data);
 	            },
 	            complete: function(result) {
-                    setColHeaders(result.data[0] || {});
+                    setColHeaders(result.data[0] || []);
                     setCsvData(result.data);
 		            console.log("All done!", result);
                 },
@@ -45,7 +45,7 @@ function CSVDisplay() {
                         </tr>
                     </thead>
                     <tbody>
-                        {csvData.Data.map((row) => (
+                        {csvData.map((row) => (
                             <tr key="">
                                 {colHeaders.map((header) => (
                                     <td key="">{row[header]}</td>
