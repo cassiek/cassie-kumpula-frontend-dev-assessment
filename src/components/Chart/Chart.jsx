@@ -13,6 +13,10 @@ function Chart() {
         updatedData = [...csvData];
         updatedData.forEach(obj => {
             obj.mag = parseFloat(obj.mag);
+            const timeDate = new Date(obj.time);
+            const miliDate = timeDate.getTime();
+            const secDate = Math.floor(miliDate / 1000);
+            obj.time = secDate;
         })
     }
 
@@ -35,8 +39,8 @@ function Chart() {
             <ResponsiveContainer width="100%" height="100%" className="chart-container">
                 <ScatterChart>
                     <CartesianGrid />
-                    {/* <XAxis dataKey="time" type="string" name="Time" unit="" /> */}
-                    <YAxis dataKey="mag" type="number" name="Magnitude of Event" unit="" />
+                    <XAxis dataKey="time" type="number" name="Time" unit=" s" domain={[1756000, 1760000]} />
+                    <YAxis dataKey="mag" type="number" name="Magnitude of Event" unit=" mag." />
                     <Legend />
                     <Scatter name="Earthquake Event Data" data={updatedData} fill="#8884d8" />
                 </ScatterChart>
