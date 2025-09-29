@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react"
-import Papa from "papaparse"
+import { useState, useEffect } from "react";
+import Papa from "papaparse";
+import "./CSVDisplay.scss";
 
 function CSVDisplay() {
     const [csvData, setCsvData] = useState([]);
@@ -32,7 +33,7 @@ function CSVDisplay() {
     console.log("HEY", csvData.length)
 
     return (
-        <section>
+        <section className="csv-display">
             {csvData.length > 0 && (
                 <table>
                     <thead>
