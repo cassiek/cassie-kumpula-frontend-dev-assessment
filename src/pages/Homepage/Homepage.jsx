@@ -46,6 +46,8 @@ function Homepage() {
         getCSV();
     }, []);
 
+    //console.log("CSV DATA", csvData[0]);
+
     return (
         <main className="homepage">
             <DataContext.Provider value={csvData} className="homepage">
