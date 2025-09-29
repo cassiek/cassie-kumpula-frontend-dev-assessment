@@ -1,45 +1,55 @@
 import { useState, useEffect } from "react";
 import Papa from "papaparse";
+import axios from "axios";
 import "./CSVDisplay.scss";
 
 function CSVDisplay() {
     const [csvData, setCsvData] = useState([]);
     const [colHeaders, setColHeaders] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
         async function getCSV() {
             try {
-                Papa.parse("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", {
-    	        download: true,
-                header: true,
-                worker: true,
-	            step: function(row) {
-		            //console.log("Row:", row.data);
-	            },
-	            complete: function(result) {
-                    setColHeaders(result.data[0] || []);
-                    setCsvData(result.data);
-		            console.log("All done!", result);
-                },
-                })
+                setLoading(true);
+                const response = await axios.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", { responseType: "text" });
+                console.log("RESPONSE", response)
+                const csvText = await response.data;
+
+                Papa.parse(csvText, {
+    	            skipEmptyLines: true,
+                    header: true,
+                    worker: true,
+	                complete: function(result) {
+                        const headers = Object.keys(result.data[0]);
+                        setColHeaders(headers);
+                        setCsvData(result.data);
+                        setLoading(false);
+		                console.log("All done!", result);
+                    },
+                    error: function(error) {
+                        setLoading(false);
+                        console.error("CSV parsing error:", error.message);
+                    }
+                });
             } catch(error) {
-                console.error("Error parsing CSV:", error.message);
+                console.error("Error fetching CSV:", error.message);
+                setLoading(false);
             }
         }
         getCSV();
     }, []);
 
-
-    console.log("HEY", csvData.length)
-
     return (
         <section className="csv-display">
-            {csvData.length > 0 && (
+            {loading && <div>Loading CSV Data...</div>}
+            {!loading && csvData.length > 0 && (
                 <table>
                     <thead>
                         <tr>
                             {colHeaders.map((header) => (
-                                <th key="">
+                                <th>
                                     {header}
                                 </th>
                             ))}
@@ -47,15 +57,16 @@ function CSVDisplay() {
                     </thead>
                     <tbody>
                         {csvData.map((row) => (
-                            <tr key="">
+                            <tr>
                                 {colHeaders.map((header) => (
-                                    <td key="">{row[header]}</td>
+                                    <td>{row[header]}</td>
                                 ))}
                             </tr>
                         ))}
                     </tbody>
                 </table>
             )}
+            {!loading && csvData.length === 0 && <div>No CSV Data Available</div>}
         </section>
     )
 };
