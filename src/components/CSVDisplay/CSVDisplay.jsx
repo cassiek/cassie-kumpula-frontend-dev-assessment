@@ -1,27 +1,35 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Papa from "papaparse"
 
 function CSVDisplay() {
-        const [csvData, setCsvData] = useState([]);
-        const [colHeaders, setColHeaders] = useState([]);
+    const [csvData, setCsvData] = useState([]);
+    const [colHeaders, setColHeaders] = useState([]);
 
-        Papa.parse("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", {
-    	download: true,
-        header: true,
-        worker: true,
-	    step: function(row) {
-		    console.log("Row:", row.data);
-	    },
-	    complete: function(result) {
-            setColHeaders(Object.keys(result.data[0] || {}));
-            setCsvData(result.data);
-		    console.log("All done!", result);
-	    },
-        error: function(error) {
-            console.error("Error parsing CSV:", error.message);
+    useEffect(() => {
+        async function getCSV() {
+            try {
+                Papa.parse("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv", {
+    	        download: true,
+                header: true,
+                worker: true,
+	            step: function(row) {
+		            //console.log("Row:", row.data);
+	            },
+	            complete: function(result) {
+                    setColHeaders(result.data[0] || {});
+                    setCsvData(result.data);
+		            console.log("All done!", result);
+                },
+                })
+            } catch(error) {
+                console.error("Error parsing CSV:", error.message);
+            }
         }
-    });
-    
+        getCSV();
+    }, []);
+
+
+    console.log("HEY", csvData.length)
 
     return (
         <section>
