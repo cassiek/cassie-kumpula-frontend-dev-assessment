@@ -1,5 +1,6 @@
 import { useState, useEffect, createContext, useContext } from "react";
 import "./CSVDisplay.scss";
+import { DataContext, HeaderContext, LoadingContext } from "../../pages/Homepage/Homepage.jsx";
 
 function CSVDisplay() {
     const csvData = useContext(DataContext);

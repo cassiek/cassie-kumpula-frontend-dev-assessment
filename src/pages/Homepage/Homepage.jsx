@@ -5,9 +5,9 @@ import "./Homepage.scss";
 import Papa from "papaparse";
 import axios from "axios";
 
-const DataContext = createContext();
-const HeaderContext = createContext();
-const LoadingContext = createContext();
+export const DataContext = createContext();
+export const HeaderContext = createContext();
+export const LoadingContext = createContext();
 
 function Homepage() {
     const [csvData, setCsvData] = useState([]);
@@ -47,14 +47,16 @@ function Homepage() {
     }, []);
 
     return (
-        <DataContext.Provider value={csvData} className="homepage">
-            <HeaderContext.Provider value={colHeaders}>
-                <LoadingContext.Provider value={loading}>
-                    <Chart />
-                    <CSVDisplay />
-                </LoadingContext.Provider>
-            </HeaderContext.Provider>
-        </DataContext.Provider>
+        <main className="homepage">
+            <DataContext.Provider value={csvData} className="homepage">
+                <HeaderContext.Provider value={colHeaders}>
+                    <LoadingContext.Provider value={loading}>
+                        <Chart data={csvData} />
+                        <CSVDisplay />
+                    </LoadingContext.Provider>
+                </HeaderContext.Provider>
+            </DataContext.Provider>
+        </main>
     )
 }
 
