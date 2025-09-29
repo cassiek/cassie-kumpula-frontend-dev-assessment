@@ -5,8 +5,7 @@ import { DataContext } from "../../pages/Homepage/Homepage";
 
 function Chart() {
     const csvData = useContext(DataContext);
-    //const [updatedData, setUpdatedData] = useState([]);
-    //
+    
     let updatedData = [];
 
     if (csvData) {
@@ -21,18 +20,6 @@ function Chart() {
     }
 
     console.log("UPDATED DATA", updatedData);
-        // useEffect(() => {
-        //     function parseCsvData(csvData) {
-        //         const formattedData = csvData.map((entry) => ({
-        //             time: entry.time,
-        //             mag: parseFloat(entry.mag)
-        //         }));
-        //         setUpdatedData(formattedData);
-        //         console.log("FORMATTED DATA", formattedData);
-        //     }
-        //     parseCsvData(csvData);
-        // }, []);
-    
 
     return (
         <section className="chart">
