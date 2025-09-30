@@ -25,9 +25,9 @@ function Chart() {
         <section className="chart">
             <ResponsiveContainer width="100%" height="100%" className="chart-container">
                 <ScatterChart>
-                    <CartesianGrid />
-                    <XAxis dataKey="time" type="number" name="Time" unit=" s" domain={[1756000, 1760000]} />
-                    <YAxis dataKey="mag" type="number" name="Magnitude of Event" unit=" mag." />
+                    <CartesianGrid strokeDasharray={4}/>
+                    <XAxis dataKey="time" type="number" name="Time" unit="s" domain={[1756000, 1760000]} />
+                    <YAxis dataKey="mag" type="number" name="Magnitude of Event" unit="mag." />
                     <Legend />
                     <Scatter name="Earthquake Event Data" data={updatedData} fill="#8884d8" />
                 </ScatterChart>
