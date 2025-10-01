@@ -1,9 +1,11 @@
 .navbar {
-
+    display: flex;
+    justify-content: center;
     &__title {
         font-family: 'OpenSans-Bold', sans-serif;
         font-size: 1.5rem;
-        color: #ffffff;
-        margin-left: 1rem;
+        color: #151515;
+        //justify-content: center;
+        margin-top: 2rem;
     }
 }
