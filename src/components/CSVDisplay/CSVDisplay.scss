@@ -1,4 +1,21 @@
 .csv-display {
     width: 30rem;
     height: 40rem;
+    overflow-x: auto;
+    color: #626262;
+    &__header {
+        font-family: 'OpenSans-Bold', sans-serif;
+        font-size: 1rem;
+        color: #4a4a4a;
+        text-align: left;
+    }
+}
+
+th, td {
+    border: 1px solid rgb(201, 201, 201);
+    padding: 0.25rem 0.5rem;
+}
+
+table {
+    border-collapse: collapse;
 }
