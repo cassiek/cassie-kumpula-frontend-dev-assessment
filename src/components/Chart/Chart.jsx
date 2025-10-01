@@ -23,7 +23,7 @@ function Chart() {
 
     return (
         <section className="chart">
-            <ResponsiveContainer width="100%" height="100%" className="chart-container">
+            <ResponsiveContainer width="100%" height="100%" className="chart__container">
                 <ScatterChart>
                     <CartesianGrid strokeDasharray={4}/>
                     <XAxis dataKey="time" type="number" name="Time" unit="s" domain={[1756000, 1760000]} />
