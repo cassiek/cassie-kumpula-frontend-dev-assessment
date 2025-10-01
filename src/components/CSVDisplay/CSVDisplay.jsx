@@ -16,7 +16,7 @@ function CSVDisplay() {
                     <thead>
                         <tr>
                             {colHeaders.map((header) => (
-                                <th>
+                                <th className="csv-display__header">
                                     {header}
                                 </th>
                             ))}
