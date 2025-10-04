@@ -6,6 +6,7 @@ function CSVDisplay() {
     const csvData = useContext(DataContext);
     const colHeaders = useContext(HeaderContext);
     const loading = useContext(LoadingContext);
+    const [hoveredRowIndex, setHoveredRowIndex] = useState(null);
     
 
     return (
@@ -23,10 +24,14 @@ function CSVDisplay() {
                         </tr>
                     </thead>
                     <tbody>
-                        {csvData.map((row) => (
-                            <tr>
+                        {csvData.map((row, index) => (
+                            <tr
+                                key={index}
+                                onMouseEnter={() => setHoveredRowIndex(index)}
+                                onMouseLeave={() => setHoveredRowIndex(null)}
+                            >
                                 {colHeaders.map((header) => (
-                                    <td>{row[header]}</td>
+                                    <td key={header}>{row[header]}</td>
                                 ))}
                             </tr>
                         ))}
