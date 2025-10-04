@@ -1,4 +1,4 @@
-import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Legend, Scatter } from "recharts";
+import { ResponsiveContainer, ScatterChart, CartesianGrid, XAxis, YAxis, Legend, Scatter, Tooltip } from "recharts";
 import "./Chart.scss";
 import { useContext } from "react";
 import { DataContext } from "../../pages/Homepage/Homepage";
@@ -32,6 +32,7 @@ function Chart() {
                     <YAxis dataKey="mag" type="number" name="Magnitude of Event" unit="mag." />
                     <Legend />
                     <Scatter name="Earthquake Event Data" data={updatedData} fill="#8884d8" />
+                    <Tooltip cursor={{ strokeDasharray: '3 3' }} />
                 </ScatterChart>
             </ResponsiveContainer>
         </section>
